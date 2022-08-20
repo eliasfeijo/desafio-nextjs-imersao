@@ -13,6 +13,17 @@ const theme = createTheme({
       main: red.A400,
     },
   },
+  typography: {
+    h1: {
+      fontSize: "3.75rem",
+    },
+    h2: {
+      fontSize: "3rem",
+    },
+    h3: {
+      fontSize: "2.5rem",
+    },
+  },
 });
 
 export default theme;
