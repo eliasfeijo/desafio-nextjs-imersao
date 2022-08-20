@@ -1,16 +1,15 @@
 import { Box, Typography } from "@mui/material";
-import type { NextPage } from "next";
+import { NextPage } from "next";
 import Head from "next/head";
-import Link from "../components/Link";
 
-const Home: NextPage = () => {
+const Posts: NextPage = () => {
   return (
     <Box sx={{ mt: 3 }}>
       <Head>
-        <title>Home | Desafio Next.js Imersão</title>
+        <title>Posts | Desafio Next.js Imersão</title>
       </Head>
       <Typography variant="h2" sx={{ textAlign: "center" }}>
-        Home
+        Posts
       </Typography>
       <Box
         sx={{
@@ -21,10 +20,12 @@ const Home: NextPage = () => {
           alignItems: "center",
         }}
       >
-        <Link href="/posts">Posts</Link>
+        <p>Post 1</p>
+        <p>Post 2</p>
+        <p>Post 3</p>
       </Box>
     </Box>
   );
 };
 
-export default Home;
+export default Posts;
