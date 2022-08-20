@@ -1,17 +1,17 @@
+import { Box, Container, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <Box sx={{ mt: 5 }}>
       <Head>
-        <title>Desafio Next.js Imersão</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Home | Desafio Next.js Imersão</title>
       </Head>
-      <main>
-        <h1>Desafio Next.js Imersão</h1>
-      </main>
-    </div>
+      <Container component="main">
+        <Typography variant="h1">Desafio Next.js Imersão</Typography>
+      </Container>
+    </Box>
   );
 };
 
