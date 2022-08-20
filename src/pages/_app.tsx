@@ -19,7 +19,10 @@ export default function MyApp(props: MyAppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+        />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
