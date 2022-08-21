@@ -8,26 +8,27 @@ import {
 import axios from "axios";
 import { NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
+import { Post } from "../../model";
 
 const POSTS_PER_PAGE = 10;
-
-interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
 
 interface PostsProps {
   data: Post[];
 }
 
 const Posts: NextPage<PostsProps, {}> = ({ data }) => {
+  const router = useRouter();
+
   const [page, setPage] = useState(1);
 
   const handlePageChange = (event: ChangeEvent<unknown>, page: number) => {
     setPage(page);
+  };
+
+  const handlePostClick = (id: number) => {
+    router.push(`/posts/${id}`);
   };
 
   const renderPosts = () => {
@@ -49,6 +50,7 @@ const Posts: NextPage<PostsProps, {}> = ({ data }) => {
         return (
           <Grid key={post.id} xs={12} md={6}>
             <Paper
+              onClick={() => handlePostClick(post.id)}
               sx={{
                 p: 5,
                 height: "100%",
@@ -56,6 +58,7 @@ const Posts: NextPage<PostsProps, {}> = ({ data }) => {
                 flexDirection: "column",
                 justifyContent: "space-evenly",
                 alignItems: "center",
+                cursor: "pointer",
               }}
             >
               <Typography variant="h4" sx={{ textAlign: "center" }}>
