@@ -2,6 +2,8 @@ import { Box, capitalize, Divider, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
+import { useContext, useEffect } from "react";
+import { ActionTypes, AppContext } from "../../contexts/AppContext";
 import { Comment, Post } from "../../model";
 
 interface PostProps {
@@ -9,6 +11,15 @@ interface PostProps {
 }
 
 const Post: NextPage<PostProps, {}> = ({ data }) => {
+  const { dispatch } = useContext(AppContext);
+
+  useEffect(() => {
+    dispatch({
+      type: ActionTypes.SET_CURRENT_PAGE,
+      page: "post",
+    });
+  }, [dispatch]);
+
   if (!data) {
     return (
       <Box sx={{ mt: 3 }}>

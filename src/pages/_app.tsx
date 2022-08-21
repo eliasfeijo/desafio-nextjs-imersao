@@ -8,6 +8,7 @@ import theme from "../theme";
 import createEmotionCache from "../utils/createEmotionCache";
 import { Box, Container } from "@mui/material";
 import Header from "../components/Header";
+import { AppProvider } from "../contexts/AppContext";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -29,19 +30,21 @@ export default function MyApp(props: MyAppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Box
-          sx={{
-            backgroundColor: "secondary.dark",
-            height: "100vh",
-            overflowY: "auto",
-            color: "#fff",
-          }}
-        >
-          <Header />
-          <Container component="main">
-            <Component {...pageProps} />
-          </Container>
-        </Box>
+        <AppProvider>
+          <Box
+            sx={{
+              backgroundColor: "secondary.dark",
+              height: "100vh",
+              overflowY: "auto",
+              color: "#fff",
+            }}
+          >
+            <Header />
+            <Container component="main">
+              <Component {...pageProps} />
+            </Container>
+          </Box>
+        </AppProvider>
       </ThemeProvider>
     </CacheProvider>
   );

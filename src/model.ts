@@ -13,4 +13,6 @@ interface Comment {
   body: string;
 }
 
-export type { Post, Comment };
+type Page = "home" | "list-posts" | "post";
+
+export type { Post, Comment, Page };

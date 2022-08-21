@@ -9,11 +9,30 @@ import {
 } from "@mui/material";
 import { ArrowBack as ArrowBackIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { AppContext } from "../../contexts/AppContext";
 
 const HEADER_TITLE = "Blog";
 
 const Header = () => {
+  const { state } = useContext(AppContext);
+
   const router = useRouter();
+
+  const handleBackClick = () => {
+    if (state.currentPage) {
+      switch (state.currentPage) {
+        case "list-posts":
+          router.push("/");
+          break;
+        case "post":
+          router.push("/posts");
+          break;
+      }
+      return;
+    }
+    router.push("/");
+  };
 
   return (
     <Box>
@@ -30,11 +49,7 @@ const Header = () => {
           }}
         >
           {router.pathname !== "/" && (
-            <IconButton
-              size="large"
-              sx={{ mr: 2 }}
-              onClick={() => router.back()}
-            >
+            <IconButton size="large" sx={{ mr: 2 }} onClick={handleBackClick}>
               <ArrowBackIcon />
             </IconButton>
           )}
@@ -55,7 +70,7 @@ const Header = () => {
               edge="start"
               color="inherit"
               sx={{ mr: 2 }}
-              onClick={() => router.back()}
+              onClick={handleBackClick}
             >
               <ArrowBackIcon />
             </IconButton>
