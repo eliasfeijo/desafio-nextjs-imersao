@@ -4,8 +4,10 @@ import {
   Container,
   Divider,
   IconButton,
+  styled,
   Toolbar,
   Typography,
+  useScrollTrigger,
 } from "@mui/material";
 import { ArrowBack as ArrowBackIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
@@ -15,13 +17,19 @@ import { Page, Pages, PagesEnum } from "../../model";
 
 const HEADER_TITLE = "Blog";
 
+const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
+
 const Header = () => {
   const { state, dispatch } = useContext(AppContext);
 
   const router = useRouter();
 
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+  });
+
   useEffect(() => {
-    console.log(router.pathname);
     dispatch({
       type: ActionTypes.SET_CURRENT_PAGE,
       page:
@@ -48,7 +56,13 @@ const Header = () => {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        position: { xs: "static", md: "sticky" },
+        top: 0,
+        backgroundColor: "secondary.dark",
+      }}
+    >
       <Container
         sx={{
           display: { xs: "none", md: "block" },
@@ -75,7 +89,10 @@ const Header = () => {
         </Box>
         <Divider sx={{ my: 3 }} />
       </Container>
-      <AppBar position="static" sx={{ display: { xs: "block", md: "none" } }}>
+      <AppBar
+        elevation={trigger ? 4 : 0}
+        sx={{ display: { xs: "block", md: "none" } }}
+      >
         <Toolbar>
           {router.pathname !== "/" && (
             <IconButton
@@ -93,6 +110,7 @@ const Header = () => {
           </Typography>
         </Toolbar>
       </AppBar>
+      <Offset sx={{ display: { xs: "block", md: "none" } }} />
     </Box>
   );
 };

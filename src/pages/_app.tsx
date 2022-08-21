@@ -38,8 +38,6 @@ export default function MyApp(props: MyAppProps) {
               height: "100%",
               backgroundColor: "secondary.dark",
               color: "#fff",
-              display: "flex",
-              flexDirection: "column",
             }}
           >
             <Header />
