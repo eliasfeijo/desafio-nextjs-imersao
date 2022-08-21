@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, capitalize, Divider, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
@@ -28,7 +28,7 @@ const Post: NextPage<PostProps, {}> = ({ data }) => {
     return post.body.split("\n").map((line, index) => {
       return (
         <Typography key={index} variant="body1" component="p" sx={{ mt: 2 }}>
-          {line}
+          {capitalize(line)}
         </Typography>
       );
     });
@@ -37,14 +37,13 @@ const Post: NextPage<PostProps, {}> = ({ data }) => {
   const renderComments = () => {
     return comments.map((comment) => {
       return (
-        <Box key={comment.id} sx={{ mt: 2 }}>
-          <Typography variant="h5">
-            {comment.email} - {comment.name}
-          </Typography>
+        <Paper key={comment.id} sx={{ mt: 2, px: 5, py: 3 }}>
+          <Typography variant="h5">{comment.email}</Typography>
+          <Typography variant="h6">{comment.name}</Typography>
           <Typography variant="body1" component="p">
             {comment.body}
           </Typography>
-        </Box>
+        </Paper>
       );
     });
   };
@@ -55,14 +54,14 @@ const Post: NextPage<PostProps, {}> = ({ data }) => {
         <title>{post.title} | Desafio Next.js Imersão</title>
       </Head>
       <Typography variant="h2" sx={{ textAlign: "center" }}>
-        {post.title}
+        {capitalize(post.title)}
       </Typography>
-      <Box sx={{ mt: 3 }}>{renderPostBody()}</Box>
+      <Box sx={{ mt: 3, p: 5 }}>{renderPostBody()}</Box>
       <Divider sx={{ my: 3 }} />
       <Typography variant="h4" sx={{ textAlign: "center" }}>
         Comentários
       </Typography>
-      <Box sx={{ mt: 3 }}>{renderComments()}</Box>
+      <Box sx={{ my: 3 }}>{renderComments()}</Box>
     </Box>
   );
 };

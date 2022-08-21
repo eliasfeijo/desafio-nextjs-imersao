@@ -1,5 +1,6 @@
 import {
   Box,
+  capitalize,
   Pagination,
   Paper,
   Typography,
@@ -62,7 +63,7 @@ const Posts: NextPage<PostsProps, {}> = ({ data }) => {
               }}
             >
               <Typography variant="h4" sx={{ textAlign: "center" }}>
-                {post.title}
+                {capitalize(post.title)}
               </Typography>
               <Typography variant="body1" sx={{ textAlign: "center", mt: 2 }}>
                 {body}
