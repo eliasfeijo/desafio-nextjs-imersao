@@ -1,18 +1,9 @@
 import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
+import palette from "./palette";
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#556cd6",
-    },
-    secondary: {
-      main: "#19857b",
-    },
-    error: {
-      main: red.A400,
-    },
-  },
+  palette,
   typography: {
     h1: {
       fontSize: "3.75rem",
@@ -22,6 +13,37 @@ const theme = createTheme({
     },
     h3: {
       fontSize: "2.5rem",
+    },
+  },
+  components: {
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#6E6E6E",
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: palette.secondary.main,
+          color: palette.secondary.contrastText,
+        },
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          color: palette.secondary.contrastText,
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: palette.secondary.contrastText,
+        },
+      },
     },
   },
 });
