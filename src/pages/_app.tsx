@@ -37,10 +37,12 @@ export default function MyApp(props: MyAppProps) {
               height: "100vh",
               overflowY: "auto",
               color: "#fff",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             <Header />
-            <Container component="main">
+            <Container component="main" sx={{ flex: 1 }}>
               <Component {...pageProps} />
             </Container>
           </Box>

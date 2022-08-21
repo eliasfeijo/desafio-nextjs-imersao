@@ -9,29 +9,42 @@ import {
 } from "@mui/material";
 import { ArrowBack as ArrowBackIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import { AppContext } from "../../contexts/AppContext";
+import { useContext, useEffect } from "react";
+import { ActionTypes, AppContext } from "../../contexts/AppContext";
+import { Page, Pages, PagesEnum } from "../../model";
 
 const HEADER_TITLE = "Blog";
 
 const Header = () => {
-  const { state } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const router = useRouter();
 
+  useEffect(() => {
+    console.log(router.pathname);
+    dispatch({
+      type: ActionTypes.SET_CURRENT_PAGE,
+      page:
+        PagesEnum[
+          Object.keys(PagesEnum)[
+            (Object.values(PagesEnum) as Page[]).indexOf(
+              router.pathname as Page
+            )
+          ] as Pages
+        ] || PagesEnum.NotFound,
+    });
+  }, [router.pathname, dispatch]);
+
   const handleBackClick = () => {
-    if (state.currentPage) {
-      switch (state.currentPage) {
-        case "list-posts":
-          router.push("/");
-          break;
-        case "post":
-          router.push("/posts");
-          break;
-      }
-      return;
+    switch (state.currentPage) {
+      case PagesEnum.Post:
+        router.push("/posts");
+        break;
+      case PagesEnum.ListPosts:
+      default:
+        router.push("/");
+        break;
     }
-    router.push("/");
   };
 
   return (

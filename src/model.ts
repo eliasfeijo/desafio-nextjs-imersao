@@ -13,6 +13,17 @@ interface Comment {
   body: string;
 }
 
-type Page = "home" | "list-posts" | "post";
+enum PagesEnum {
+  Home = "/",
+  ListPosts = "/posts",
+  Post = "/posts/[id]",
+  NotFound = "/404",
+}
 
-export type { Post, Comment, Page };
+type Pages = keyof typeof PagesEnum;
+
+type Page = `${PagesEnum}`;
+
+export { PagesEnum };
+
+export type { Post, Comment, Pages, Page };

@@ -10,8 +10,7 @@ import axios from "axios";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
-import { ActionTypes, AppContext } from "../../contexts/AppContext";
+import { ChangeEvent, useState } from "react";
 import { Post } from "../../model";
 
 const POSTS_PER_PAGE = 10;
@@ -21,18 +20,9 @@ interface PostsProps {
 }
 
 const Posts: NextPage<PostsProps, {}> = ({ data }) => {
-  const { dispatch } = useContext(AppContext);
-
   const router = useRouter();
 
   const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    dispatch({
-      type: ActionTypes.SET_CURRENT_PAGE,
-      page: "list-posts",
-    });
-  }, [dispatch]);
 
   const handlePageChange = (event: ChangeEvent<unknown>, page: number) => {
     setPage(page);

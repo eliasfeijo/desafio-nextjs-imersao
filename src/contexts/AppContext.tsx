@@ -1,8 +1,8 @@
 import React, { createContext, useReducer } from "react";
-import { Page } from "../model";
+import { PagesEnum } from "../model";
 
 type State = {
-  currentPage: Page | undefined;
+  currentPage: PagesEnum | undefined;
 };
 
 enum ActionTypes {
@@ -11,7 +11,7 @@ enum ActionTypes {
 
 type Action = {
   type: ActionTypes.SET_CURRENT_PAGE;
-  page: Page;
+  page: PagesEnum;
 };
 
 const initialState: State = {
