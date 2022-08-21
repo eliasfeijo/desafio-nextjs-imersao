@@ -1,3 +1,6 @@
-/node_modules
-/.next
-/build
+Dockerfile
+.dockerignore
+node_modules
+.next
+.git
+README.md
