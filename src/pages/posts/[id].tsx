@@ -27,7 +27,12 @@ const Post: NextPage<PostProps, {}> = ({ data }) => {
   const renderPostBody = () => {
     return post.body.split("\n").map((line, index) => {
       return (
-        <Typography key={index} variant="body1" component="p" sx={{ mt: 2 }}>
+        <Typography
+          key={index}
+          variant="body1"
+          component="p"
+          sx={{ mt: 2, color: "#909090" }}
+        >
           {capitalize(line)}
         </Typography>
       );
@@ -37,10 +42,10 @@ const Post: NextPage<PostProps, {}> = ({ data }) => {
   const renderComments = () => {
     return comments.map((comment) => {
       return (
-        <Paper key={comment.id} sx={{ mt: 2, px: 5, py: 3 }}>
+        <Paper key={comment.id} sx={{ px: 5, py: 3, mt: 3 }}>
           <Typography variant="h5">{comment.email}</Typography>
           <Typography variant="h6">{comment.name}</Typography>
-          <Typography variant="body1" component="p">
+          <Typography variant="body1" component="p" sx={{ color: "#909090" }}>
             {comment.body}
           </Typography>
         </Paper>
@@ -49,14 +54,14 @@ const Post: NextPage<PostProps, {}> = ({ data }) => {
   };
 
   return (
-    <Box sx={{ mt: 3 }}>
+    <Box sx={{ py: 3 }}>
       <Head>
-        <title>{post.title} | Desafio Next.js Imersão</title>
+        <title>{capitalize(post.title)} | Desafio Next.js Imersão</title>
       </Head>
       <Typography variant="h2" sx={{ textAlign: "center" }}>
         {capitalize(post.title)}
       </Typography>
-      <Box sx={{ mt: 3, p: 5 }}>{renderPostBody()}</Box>
+      <Box sx={{ p: 5 }}>{renderPostBody()}</Box>
       <Divider sx={{ my: 3 }} />
       <Typography variant="h4" sx={{ textAlign: "center" }}>
         Comentários

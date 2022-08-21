@@ -65,7 +65,10 @@ const Posts: NextPage<PostsProps, {}> = ({ data }) => {
               <Typography variant="h4" sx={{ textAlign: "center" }}>
                 {capitalize(post.title)}
               </Typography>
-              <Typography variant="body1" sx={{ textAlign: "center", mt: 2 }}>
+              <Typography
+                variant="body1"
+                sx={{ textAlign: "center", mt: 2, color: "#909090" }}
+              >
                 {body}
               </Typography>
             </Paper>
@@ -89,7 +92,11 @@ const Posts: NextPage<PostsProps, {}> = ({ data }) => {
         count={POSTS_PER_PAGE}
         page={page}
         onChange={handlePageChange}
-        sx={{ my: 5, float: "right" }}
+        sx={{
+          py: 5,
+          display: "flex",
+          justifyContent: { xs: "center", md: "flex-end" },
+        }}
       />
     </Box>
   );

@@ -6,7 +6,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "../theme";
 import createEmotionCache from "../utils/createEmotionCache";
-import { Container, Divider, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
+import Header from "../components/Header";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -17,6 +18,7 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -27,13 +29,19 @@ export default function MyApp(props: MyAppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container component="main" sx={{ mt: 5 }}>
-          <Typography variant="h1" sx={{ textAlign: "center" }}>
-            Desafio Next.js Imersão
-          </Typography>
-          <Divider sx={{ my: 3 }} />
-          <Component {...pageProps} />
-        </Container>
+        <Box
+          sx={{
+            backgroundColor: "secondary.dark",
+            height: "100vh",
+            overflowY: "auto",
+            color: "#fff",
+          }}
+        >
+          <Header />
+          <Container component="main">
+            <Component {...pageProps} />
+          </Container>
+        </Box>
       </ThemeProvider>
     </CacheProvider>
   );
