@@ -9,6 +9,7 @@ import createEmotionCache from "../utils/createEmotionCache";
 import { Box, Container } from "@mui/material";
 import Header from "../components/Header";
 import { AppProvider } from "../contexts/AppContext";
+import "../styles/global.css";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -33,9 +34,9 @@ export default function MyApp(props: MyAppProps) {
         <AppProvider>
           <Box
             sx={{
+              minHeight: "100vh",
+              height: "100%",
               backgroundColor: "secondary.dark",
-              height: "100vh",
-              overflowY: "auto",
               color: "#fff",
               display: "flex",
               flexDirection: "column",
