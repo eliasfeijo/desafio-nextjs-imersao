@@ -1,7 +1,13 @@
 import { Box, capitalize, Divider, Paper, Typography } from "@mui/material";
 import axios from "axios";
-import { GetServerSidePropsContext, NextPage } from "next";
+import {
+  GetServerSidePropsContext,
+  GetStaticPathsResult,
+  GetStaticPropsContext,
+  NextPage,
+} from "next";
 import Head from "next/head";
+import slugify from "slugify";
 import { Comment, Post } from "../../model";
 
 interface PostProps {
@@ -53,10 +59,12 @@ const Post: NextPage<PostProps, {}> = ({ data }) => {
     });
   };
 
+  const title = `${post.title} | Desafio Next.js Imersão`;
+
   return (
     <Box sx={{ py: 3 }}>
       <Head>
-        <title>{capitalize(post.title)} | Desafio Next.js Imersão</title>
+        <title>{title}</title>
       </Head>
       <Typography variant="h2" sx={{ textAlign: "center" }}>
         {capitalize(post.title)}
@@ -71,18 +79,38 @@ const Post: NextPage<PostProps, {}> = ({ data }) => {
   );
 };
 
-export async function getServerSideProps({
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
+  const response = await axios.get(
+    `https://jsonplaceholder.typicode.com/posts`
+  );
+
+  const { data } = response;
+
+  return {
+    paths: data.map((post: Post) => ({
+      params: { slug: slugify(`${post.title} ${post.id}`, { lower: true }) },
+    })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({
   params,
-}: GetServerSidePropsContext) {
+}: GetStaticPropsContext<{ slug?: string }>) {
+  if (!params?.slug) {
+    return { props: { data: null } };
+  }
+
+  const id = params.slug.split("-").pop();
   try {
     const responsePost = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts/${params?.id}`
+      `https://jsonplaceholder.typicode.com/posts/${id}`
     );
     const post = responsePost.data;
 
     try {
       const responseComments = await axios.get(
-        `https://jsonplaceholder.typicode.com/posts/${params?.id}/comments`
+        `https://jsonplaceholder.typicode.com/posts/${id}/comments`
       );
       const comments = responseComments.data;
       return { props: { data: { post, comments } } };

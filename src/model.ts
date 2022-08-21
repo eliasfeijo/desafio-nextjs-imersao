@@ -16,7 +16,7 @@ interface Comment {
 enum PagesEnum {
   Home = "/",
   ListPosts = "/posts",
-  Post = "/posts/[id]",
+  Post = "/posts/[slug]",
   NotFound = "/404",
 }
 

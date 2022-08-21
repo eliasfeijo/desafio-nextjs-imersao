@@ -11,6 +11,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
+import slugify from "slugify";
 import { Post } from "../../model";
 
 const POSTS_PER_PAGE = 10;
@@ -28,8 +29,9 @@ const Posts: NextPage<PostsProps, {}> = ({ data }) => {
     setPage(page);
   };
 
-  const handlePostClick = (id: number) => {
-    router.push(`/posts/${id}`);
+  const handlePostClick = (id: number, title: string) => {
+    const slug = slugify(`${title} ${id}`, { lower: true });
+    router.push(`/posts/${slug}`);
   };
 
   const renderPosts = () => {
@@ -51,7 +53,7 @@ const Posts: NextPage<PostsProps, {}> = ({ data }) => {
         return (
           <Grid key={post.id} xs={12} md={6}>
             <Paper
-              onClick={() => handlePostClick(post.id)}
+              onClick={() => handlePostClick(post.id, post.title)}
               sx={{
                 p: 5,
                 height: "100%",
