@@ -35,6 +35,15 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           color: palette.secondary.contrastText,
+          "&.Mui-selected": {
+            backgroundColor: "rgba(0, 0, 0, 0.35)",
+            "&:hover": {
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+            },
+          },
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+          },
         },
       },
     },
@@ -42,6 +51,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           color: palette.secondary.contrastText,
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+          },
         },
       },
     },
